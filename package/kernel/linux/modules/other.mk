@@ -559,6 +559,23 @@ endef
 
 $(eval $(call KernelPackage,rtc-em3027))
 
+define KernelPackage/rtc-hym8563
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=Haoyu Microelectronics HYM8563 support
+  DEFAULT:=m if ALL_KMODS && RTC_SUPPORT
+  DEPENDS:=+kmod-i2c-core
+  KCONFIG:=CONFIG_RTC_DRV_HYM8563 \
+	CONFIG_RTC_CLASS=y
+  FILES:=$(LINUX_DIR)/drivers/rtc/rtc-hym8563.ko
+  AUTOLOAD:=$(call AutoProbe,rtc-hym8563)
+endef
+
+define KernelPackage/rtc-hym8563/description
+ Kernel module for Haoyu Microelectronics HYM8563.
+endef
+
+$(eval $(call KernelPackage,rtc-hym8563))
+
 
 define KernelPackage/rtc-isl1208
   SUBMENU:=$(OTHER_MENU)
